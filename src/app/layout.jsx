@@ -1,3 +1,7 @@
+'use client'
+
+import { Provider } from 'react-redux';
+import store from '../redux/store';
 import React from "react";
 import "@/styles/tailwind.css";
 import "../styles/index.css";
@@ -5,6 +9,7 @@ import "../styles/font.css";
 
 function RootLayout({ children }) {
   return (
+    <Provider store={store}>
     <html lang="en">
       <head>
         <meta charSet="utf-8" />
@@ -15,6 +20,7 @@ function RootLayout({ children }) {
       </head>
       <body>{children}</body>
     </html>
+    </Provider>
   );
 }
 export default RootLayout;

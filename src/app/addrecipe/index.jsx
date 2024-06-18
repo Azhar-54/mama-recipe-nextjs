@@ -3,8 +3,9 @@
 import { Text, Button, Input, TextArea } from "../../components";
 import Footer from "../../components/Footer";
 import Header from "../../components/Header";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import axios from 'axios';
+import { useRouter } from 'next/navigation'; // Assuming you're using Next.js
 
 export default function AddRecipePage() {
   const [formData, setFormData] = useState({
@@ -15,6 +16,15 @@ export default function AddRecipePage() {
   const [imagePreview, setImagePreview] = useState(null);
   const [imageFile, setImageFile] = useState(null);
   const [uploading, setUploading] = useState(false);
+  const router = useRouter(); 
+
+  useEffect(() => {
+    const token = localStorage.getItem('token');
+    if (!token) {
+      alert('Anda harus login');
+      router.push('/login'); 
+    }
+  }, []);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -103,7 +113,7 @@ export default function AddRecipePage() {
                   {imagePreview ? (
                     <img src={imagePreview} alt="Preview" className="mt-[82px] rounded-[15px] object-cover w-full h-full" />
                   ) : (
-                    <Text size="lg" as="p" className="mt-[82px] !text-gray-700">
+                    <Text size="lg" as="p" className="mt-[82px] !text-blue-500">
                       Add Photo
                     </Text>
                   )}
@@ -135,17 +145,11 @@ export default function AddRecipePage() {
                 </Button>
               </form>
             </div>
-
-            {/* footer section */}
-            <Footer className="mt-[100px]" />
-          </div>
-          <div className="w-full md:p-5"> {/* Adjusted width and removed container-xs */}
-            <Text size="3xl" as="p" className="leading-[78px] !text-white-A700">
-              Have a new ramen recipe? Let’s share!
-            </Text>
+            
           </div>
         </div>
       </div>
+      <Footer className="mt-[100px] " />
     </>
   );
 }

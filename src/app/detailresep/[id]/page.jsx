@@ -1,41 +1,55 @@
 'use client';
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import { useParams } from 'next/navigation';
-import axios from "axios";
-import { Text, Img, Button, TextArea } from "../../../components"; // Sesuaikan path ini
-import Footer from "../../../components/Footer"; // Sesuaikan path ini
-import Header from "../../../components/Header"; // Sesuaikan path ini
+import { useRouter } from 'next/navigation';
+import { useDispatch, useSelector } from 'react-redux';
+import { fetchRecipe, toggleLike, saveRecipe } from '../../../redux/slice/feature/recipeSlice';
+import { Text, Img, Button, TextArea } from "../../../components";
+import Footer from "../../../components/Footer";
+import Header from "../../../components/Header";
 
 export default function DetailResepPage() {
   const { id } = useParams();
-  const [recipe, setRecipe] = useState(null);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
+  const dispatch = useDispatch();
+  const router = useRouter();
+  const { recipe, loading, error, liked, saved } = useSelector((state) => state.recipe);
 
   useEffect(() => {
     if (id) {
-      async function fetchRecipe() {
-        try {
-          const response = await axios.get(`https://pijar-mama-recipe.vercel.app/v1/recipes/${id}`);
-          setRecipe(response.data.data);
-          setLoading(false);
-        } catch (error) {
-          console.error("Error fetching recipe:", error);
-          setError(error);
-          setLoading(false);
-        }
-      }
-
-      fetchRecipe();
+      dispatch(fetchRecipe(id));
     }
-  }, [id]);
+  }, [id, dispatch]);
+
+  const handleLike = () => {
+    const token = localStorage.getItem('token');
+    if (token) {
+      dispatch(toggleLike({ id, token, liked })).then(() => {
+        alert(liked ? 'Like removed successfully!' : 'Recipe liked successfully!');
+      });
+    } else {
+      alert('Anda harus login terlebih dahulu');
+      router.push('/login');
+    }
+  };
+
+  const handleSave = () => {
+    const token = localStorage.getItem('token');
+    if (token) {
+      dispatch(saveRecipe({ id, token, saved })).then(() => {
+        alert(saved ? 'Recipe unsaved successfully!' : 'Recipe saved successfully!');
+      });
+    } else {
+      alert('Anda harus login terlebih dahulu');
+      router.push('/login'); // Navigate to login page
+    }
+  };
 
   if (loading) {
     return <div>Loading...</div>;
   }
 
   if (error) {
-    return <div>Error loading recipe: {error.message}</div>;
+    return <div>Error loading recipe: {error}</div>;
   }
 
   if (!recipe) {
@@ -46,23 +60,28 @@ export default function DetailResepPage() {
     <>
       <div className="flex flex-col items-center w-full bg-white-A700 pt-[66px]">
         <div className="flex flex-col items-center w-full">
-          {/* <Header /> */}
-          <div className="flex flex-col items-center mt-[151px] w-[69%] md:w-full md:p-5">
+          <Header />
+          <div className="flex flex-col items-center mt-8 w-[69%] md:w-full md:p-5">
             <div className="flex flex-col items-center w-full">
               <div className="container-xs flex flex-col items-center w-full md:p-5">
                 <Text size="4xl" as="p" className="!font-medium capitalize">
                   {recipe.title}
                 </Text>
                 <div
-                  className="mt-[68px] flex h-[700px] w-[83%] items-end justify-end rounded-[15px] bg-cover bg-no-repeat p-10 md:h-auto md:w-full sm:p-5"
+                  className="mt-[68px] flex h-[700px] w-[83%] items-end justify-end rounded-[15px] bg-cover bg-no-repeat p-10 md
+                  md
+                  sm
+                  "
                   style={{ backgroundImage: `url(${recipe.image || '/images/default-image.png'})` }}
                 >
                   <div className="mt-[568px] flex gap-4">
-                    <Button size="xs" shape="round" className="w-[52px]">
-                      <Img src="/images/img_warning.svg" width={52} height={52} />
+                    <Button size="xs" shape="round" className="w-[52px]" onClick={handleSave}>
+                      <Img src="/images/bookmark.svg" width={52} height={52} />
+                      {saved ? 'Saved' : 'Save'}
                     </Button>
-                    <Button size="xs" shape="round" className="w-[52px]">
-                      <Img src="/images/img_group_19.svg" width={52} height={52} />
+                    <Button size="xs" shape="round" className="w-[52px]" onClick={handleLike}>
+                      <Img src="/images/like.svg" width={52} height={52} />
+                      {liked ? 'Liked' : 'Like'}
                     </Button>
                   </div>
                 </div>
@@ -81,25 +100,6 @@ export default function DetailResepPage() {
                     </React.Fragment>
                   ))}
                 </Text>
-                {/* <Text size="3xl" as="p" className="mt-[77px] capitalize !text-gray-800">
-                  Video Step
-                </Text>
-                <div className="relative mt-[38px] h-[93px] w-[32%] md:h-auto">
-                  <Img
-                    src="/images/img_rectangle_314.png"
-                    width={411}
-                    height={93}
-                    alt="video image"
-                    className="h-[93px] w-full rounded-[15px] object-cover"
-                  />
-                  <Img
-                    src="/images/img_play.svg"
-                    width={34}
-                    height={29}
-                    alt="play button"
-                    className="absolute left-0 right-0 top-[24.57px] m-auto h-[29px]"
-                  /> */}
-                {/* </div> */}
               </div>
               <div className="flex flex-col items-center mt-[140px] gap-10 w-full">
                 <TextArea
@@ -137,11 +137,6 @@ export default function DetailResepPage() {
             </div>
           </div>
           <Footer className="mt-[247px]" />
-        </div>
-        <div className="container-xs px-[68px] md:p-5 md:px-5">
-          <Text size="3xl" as="p" className="leading-[78px] !text-white-A700 text-center">
-            Have a new ramen recipe? Let’s share!
-          </Text>
         </div>
       </div>
     </>

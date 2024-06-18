@@ -1,42 +1,43 @@
+// pages/login.js
 "use client";
 
-import { Text, Img, Button, CheckBox, Input, Heading } from "../../components";
-import React, { useState } from "react";
+import { Text, Img, Button, Input, Heading } from "../../components";
+import React from "react";
 import Link from "next/link";
 import axios from "axios";
+import { useRouter } from "next/navigation";
+import { useSelector, useDispatch } from 'react-redux';
+import { updateFormData, setError, setSuccess } from '../../redux/slice/formSlice';
 
-export default function LoginPage() {
-  const [formData, setFormData] = useState({
-    email: "",
-    phone: "",
-    password: "",
-    confirmPassword: "",
-    agreeToTerms: false,
-  });
-
-  const [error, setError] = useState("");
-  const [success, setSuccess] = useState("");
+export default function RegisterPage() {
+  const router = useRouter();
+  const dispatch = useDispatch();
+  const { formData, error, success } = useSelector((state) => state.form);
 
   const handleInputChange = (e) => {
     const { name, value, type, checked } = e.target;
-    setFormData((prevData) => ({
-      ...prevData,
+    dispatch(updateFormData({
       [name]: type === "checkbox" ? checked : value,
     }));
   };
 
+  const handleCheckboxChange = (e) => {
+    const { checked } = e.target;
+    dispatch(updateFormData({ agreeToTerms: checked }));
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
-    setError("");
-    setSuccess("");
+    dispatch(setError(''));
+    dispatch(setSuccess(''));
 
     if (formData.password !== formData.confirmPassword) {
-      setError("Passwords do not match");
+      dispatch(setError("Passwords do not match"));
       return;
     }
 
     if (!formData.agreeToTerms) {
-      setError("You must agree to the terms and conditions");
+      dispatch(setError("You must agree to the terms and conditions"));
       return;
     }
 
@@ -49,160 +50,131 @@ export default function LoginPage() {
       });
 
       console.log("Registration successful:", response.data);
-      setSuccess("Registration successful. Please check your email for verification.");
+      alert("Registration successful. Please check your email for verification.");
+      dispatch(setSuccess("Registration successful. Please check your email for verification."));
+      router.push("/login");
     } catch (error) {
       console.error("Registration error:", error);
       if (error.response) {
         console.error("Error response data:", error.response.data);
-        setError(`Registration failed: ${error.response.data.message || 'Unknown error'}`);
+        alert(`Registration failed: ${error.response.data.message || 'Unknown error'}`);
+        dispatch(setError(`Registration failed: ${error.response.data.message || 'Unknown error'}`));
       } else {
-        setError("Registration failed. Please try again.");
+        alert("Registration failed. Please try again.");
+        dispatch(setError("Registration failed. Please try again."));
       }
     }
   };
 
   return (
-    <div className="flex w-full bg-white-A700">
-      <div className="flex w-[86%] flex-col items-end gap-[3498px] self-end md:w-full md:gap-[2623px] md:p-5 sm:gap-[1749px]">
-        <div className="relative h-[1805px] self-stretch">
-          <div className="absolute left-0 right-0 top-[0.00px] m-auto flex w-full items-center justify-between gap-5 md:relative md:flex-col">
-            <div className="flex w-[58%] flex-col items-center justify-center bg-amber-400 px-14 pb-[659px] pt-[702px] md:w-full md:p-5">
-              <div className="flex w-[21%] flex-col items-center gap-[19px] md:w-full">
-                <Img
-                  src="/images/img_barbecue_1.svg"
-                  width={182}
-                  height={182}
-                  alt="barbecue image"
-                  className="h-[182px] w-full md:h-auto"
-                />
-                <Heading size="xs" as="h1" className="!text-white-A700">
-                  Let’s Get Started!
-                </Heading>
-              </div>
-            </div>
-            <div className="flex w-[26%] flex-col items-center gap-[30px] md:w-full">
-              <div className="flex flex-col items-center gap-[34px]">
-                <Heading as="h2">Welcome</Heading>
-                <Text as="p" className="!font-inter !font-normal !text-blue_gray-400">
-                  Create new account to access all features
-                </Text>
-              </div>
-              <form className="flex flex-col items-start self-stretch" onSubmit={handleSubmit}>
-              <div className="flex flex-col items-start self-stretch">
-                  <div className="h-px self-stretch bg-gray-100" />
-                  <Text size="lg" as="p" className="mt-[5px] !font-inter !font-medium !text-gray-600">
-                    Name
-                  </Text>
-                  <Input
-                    shape="round"
-                    type="name"
-                    name="name"
-                    placeholder="Masukan Nama"
-                    value={formData.name}
-                    onChange={handleInputChange}
-                    className="self-stretch border border-solid border-blue_gray-400 font-inter font-medium !text-blue_gray-400"
-                  />
-                </div>
-
-                <div className="flex flex-col items-start self-stretch">
-                  <div className="h-px self-stretch bg-gray-100" />
-                  <Text size="lg" as="p" className="mt-[5px] !font-inter !font-medium !text-gray-600">
-                    E-mail
-                  </Text>
-                  <Input
-                    shape="round"
-                    type="email"
-                    name="email"
-                    placeholder="Masukan Email"
-                    value={formData.email}
-                    onChange={handleInputChange}
-                    className="self-stretch border border-solid border-blue_gray-400 font-inter font-medium !text-blue_gray-400"
-                  />
-                </div>
-
-                <div className="mt-[23px] flex flex-col items-start gap-[13px] self-stretch">
-                  <Text size="lg" as="p" className="!font-inter !font-medium !text-gray-600">
-                    Phone Number
-                  </Text>
-                  <Input
-                    shape="round"
-                    type="text"
-                    name="phone"
-                    placeholder="08xxxxxxxxxx"
-                    value={formData.phone}
-                    onChange={handleInputChange}
-                    className="self-stretch border border-solid border-blue_gray-400 font-inter font-medium !text-blue_gray-400"
-                  />
-                </div>
-
-                <div className="mt-[23px] flex flex-col items-start gap-[13px] self-stretch">
-                  <Text size="lg" as="p" className="!font-inter !font-medium !text-gray-600">
-                    Create New Password
-                  </Text>
-                  <Input
-                    shape="round"
-                    type="password"
-                    name="password"
-                    placeholder="Create New Password"
-                    value={formData.password}
-                    onChange={handleInputChange}
-                    className="self-stretch border border-solid border-blue_gray-400 font-inter font-medium !text-blue_gray-400"
-                  />
-                </div>
-
-                <div className="mt-[23px] flex flex-col items-start gap-[13px] self-stretch">
-                  <Text size="lg" as="p" className="!font-inter !font-medium !text-gray-600">
-                    Confirm Password
-                  </Text>
-                  <Input
-                    shape="round"
-                    type="password"
-                    name="confirmPassword"
-                    placeholder="Confirm Password"
-                    value={formData.confirmPassword}
-                    onChange={handleInputChange}
-                    className="self-stretch border border-solid border-blue_gray-400 font-inter font-medium !text-blue_gray-400"
-                  />
-                </div>
-
-                <div className="mt-6">
-                  <label className="flex items-center gap-2 text-base font-medium text-gray-600">
-                    <input
-                      type="checkbox"
-                      name="agreeToTerms"
-                      checked={formData.agreeToTerms}
-                      onChange={handleInputChange}
-                      className="form-checkbox"
-                    />
-                    I agree to terms & conditions
-                  </label>
-                </div>
-
-                {error && <Text size="xs" as="p" className="mt-2 self-start !text-red-500">{error}</Text>}
-                {success && <Text size="xs" as="p" className="mt-2 self-start !text-green-500">{success}</Text>}
-
-                <Button shape="round" className="mt-[37px] w-full font-inter" type="submit">
-                  Register
-                </Button>
-                <Text size="xs" as="p" className="mt-4 self-end !text-gray-500">
-                  Forgot Password?
-                </Text>
-                <div className="h-px w-[40%] self-end bg-gray-100" />
-                <div className="relative mt-[-1px] h-px w-[40%] bg-gray-100" />
-                <Text size="s" as="p" className="mt-[23px] self-center !text-black-900">
-                  <span className="text-gray-500">Already have account? &nbsp;</span>
-                  <Link className="text-amber-400" href={"/login"}>
-                    Log in Here
-                  </Link>
-                </Text>
-              </form>
-            </div>
+    <div className="flex w-full min-h-screen">
+      <div className="left-section flex w-1/2 bg-amber-400 flex-col items-center justify-center p-10">
+        <Img
+          src="/images/img_barbecue_1.svg"
+          width={182}
+          height={182}
+          alt="barbecue image"
+          className="h-44 w-44"
+        />
+        <Heading size="xs" as="h1" className="!text-white-A700 mt-4 text-4xl">
+          Let’s Get Started!
+        </Heading>
+      </div>
+      <div className="right-section flex w-1/2 flex-col items-center justify-center p-10 bg-white">
+        <Heading as="h2" className="text-3xl">Welcome</Heading>
+        <Text as="p" className="mt-2 text-blue_gray-400">
+          Create new account to access all features
+        </Text>
+        {error && (
+          <Text as="p" className="text-red-500 mt-2">
+            {error}
+          </Text>
+        )}
+        {success && (
+          <Text as="p" className="text-green-500 mt-2">
+            {success}
+          </Text>
+        )}
+        <form className="flex flex-col w-full mt-4" onSubmit={handleSubmit}>
+          <label className="text-lg font-medium text-gray-600">Name</label>
+          <Input
+            shape="round"
+            type="text"
+            name="name"
+            placeholder="Masukan Nama"
+            value={formData.name}
+            onChange={handleInputChange}
+            className="mt-2 w-full p-2 border border-gray-300 rounded focus:outline-none focus:border-amber-400"
+          />
+          <label className="text-lg font-medium text-gray-600 mt-4">E-mail</label>
+          <Input
+            shape="round"
+            type="email"
+            name="email"
+            placeholder="Masukan Email"
+            value={formData.email}
+            onChange={handleInputChange}
+            className="mt-2 w-full p-2 border border-gray-300 rounded focus:outline-none focus:border-amber-400"
+          />
+          <label className="text-lg font-medium text-gray-600 mt-4">Phone Number</label>
+          <Input
+            shape="round"
+            type="text"
+            name="phone"
+            placeholder="08xxxxxxxxxx"
+            value={formData.phone}
+            onChange={handleInputChange}
+            className="mt-2 w-full p-2 border border-gray-300 rounded focus:outline-none focus:border-amber-400"
+          />
+          <label className="text-lg font-medium text-gray-600 mt-4">Create New Password</label>
+          <Input
+            shape="round"
+            type="password"
+            name="password"
+            placeholder="Create New Password"
+            value={formData.password}
+            onChange={handleInputChange}
+            className="mt-2 w-full p-2 border border-gray-300 rounded focus:outline-none focus:border-amber-400"
+          />
+          <label className="text-lg font-medium text-gray-600 mt-4">Confirm Password</label>
+          <Input
+            shape="round"
+            type="password"
+            name="confirmPassword"
+            placeholder="Confirm Password"
+            value={formData.confirmPassword}
+            onChange={handleInputChange}
+            className="mt-2 w-full p-2 border border-gray-300 rounded focus:outline-none focus:border-amber-400"
+          />
+          <div className="flex items-center mt-4">
+            <input
+              type="checkbox"
+              name="agreeToTerms"
+              checked={formData.agreeToTerms}
+              onChange={handleCheckboxChange}
+              className="mr-2"
+            />
+            <label className="text-base font-medium text-gray-600">I agree to terms & conditions</label>
           </div>
-        </div>
-        <Text size="5xl" as="p" className="mr-[109px] w-[75%] leading-[78px] !text-white-A700 md:mr-0 md:w-full">
-          Have a new ramen recipe? Let’s share!
+          <Button type="submit" className="mt-6 w-full p-2 bg-amber-400 text-white rounded hover:bg-amber-500">
+            Register
+          </Button>
+        </form>
+        <Text as="p" className="text-gray-500 mt-4 flex items-center">
+          Already have an account?
+          <Link href="/login" className="text-amber-400 ml-1">Login Here</Link>
         </Text>
       </div>
+      <style jsx>{`
+        @media (max-width: 720px) {
+          .left-section {
+            display: none;
+          }
+          .right-section {
+            width: 100%;
+          }
+        }
+      `}</style>
     </div>
   );
 }

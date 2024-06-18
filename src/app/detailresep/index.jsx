@@ -141,11 +141,6 @@ export default function DetailResepPage() {
           </div>
           <Footer className="mt-[247px]" />
         </div>
-        <div className="container-xs px-[68px] md:p-5 md:px-5">
-          <Text size="3xl" as="p" className="leading-[78px] !text-white-A700">
-            Have a new ramen recipe? Let’s share!
-          </Text>
-        </div>
       </div>
     </>
   );
