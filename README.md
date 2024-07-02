@@ -39,7 +39,7 @@
 These are the language, framework and packages to building the web
 
 - [Javascript](https://nodejs.org/en)
-- [React.Js](https://nextjs.org/)
+- [NextJs](https://nextjs.org/)
 - [Redux](https://redux.js.org/)
 - [Tailwind CSS](https://tailwindcss.com/)
 
