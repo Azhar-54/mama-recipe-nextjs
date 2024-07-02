@@ -4,7 +4,7 @@ import { Text } from "../../components/Text";
 import React, { useState, useEffect } from "react";
 import axios from 'axios';
 import Image from 'next/image';
-import Header from '../../components/Header';
+import Header from '../../components/Navbar';
 import { useRouter } from 'next/navigation';
 import '../../styles/font.css'; 
 import useWindowWidth from './useWindowWidth'; 
@@ -144,7 +144,7 @@ const ProfilePage = ({ initialTab = 'myRecipe', initialRecipes = [], userName, e
                 <div className="mt-[101px] flex flex-col items-start gap-7 self-stretch">
                   {windowWidth <= 720 ? (
                     <div className="flex items-center justify-center gap-5 md:w-full md:p-5 px-8">
-                      <button onClick={handleLeftClick} className="p-2">
+                      <button onClick={handleLeftClick} className="py-2">
                         <Image
                           src="/images/left.svg"
                           width={24}
@@ -152,7 +152,7 @@ const ProfilePage = ({ initialTab = 'myRecipe', initialRecipes = [], userName, e
                           alt="left icon"
                         />
                       </button>
-                      <div className="flex flex-wrap justify-center gap-5 md:w-full md:p-5 px-8 overflow-x-auto whitespace-nowrap">
+                      <div className="flex flex-wrap justify-center">
                         {tabs.map((tab, index) => (
                           <Text
                             key={tab.key}

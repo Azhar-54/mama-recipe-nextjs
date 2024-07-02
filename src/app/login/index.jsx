@@ -23,7 +23,10 @@ export default function LoginPage() {
       localStorage.setItem("token", token);
       Cookies.set("token", token); 
       alert("Login successful");
-      router.push("/landingpage");
+      router.push("/");
+    }else{
+      alert("anda gagal login")
+      router.push("/register");
     }
   };
 

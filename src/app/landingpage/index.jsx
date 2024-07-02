@@ -6,7 +6,7 @@ import { CloseSVG } from "../../assets/images";
 import { Text, Img, Button, Input, Heading } from "../../components";
 import Link from "next/link";
 import Image from "next/image";
-import Header from "../../components/Header";
+import Navbar from "../../components/Navbar";
 import Footer from "../../components/Footer";
 
 export default function LandingPagePage() {
@@ -32,7 +32,7 @@ export default function LandingPagePage() {
   const handleLogout = () => {
     setIsLoggedIn(false);
     localStorage.removeItem("token");
-    deleteCookie('token'); // Hapus token dari cookie
+    deleteCookie('token');
   };
 
   const handleNextPage = () => {
@@ -56,9 +56,9 @@ export default function LandingPagePage() {
   );
 
   return (
-    <div className="w-full bg-white-A700">
+    <div className="w-full bg-[#FFF5EC]">
       <div>
-        <div className="relative z-[1] h-[1210px] bg-[url(/images/img_group_22.svg)] bg-cover bg-no-repeat pb-[164px] pl-[108px] pr-[115px] md:h-auto md:px-5 md:pb-5">
+        <div className="relative z-[1] h-[1210px] bg-[#FFF5EC] bg-cover bg-no-repeat pb-[164px] pl-[108px] pr-[115px] md:h-auto md:px-5 md:pb-5">
           <div className="absolute bottom-[41%] left-[7%] m-auto flex w-[45%] flex-col items-start gap-10">
             <Heading size="md" as="h1" className="w-full capitalize leading-[90px] !text-indigo-900">
               <>
@@ -90,25 +90,9 @@ export default function LandingPagePage() {
             />
           </div>
           <div className="absolute left-0 right-0 top-[4%] m-auto flex w-full max-w-[1666px] items-center justify-between gap-5 sm:relative sm:flex-col">
-            <Header />
-            <div className="flex w-auto items-center justify-center gap-2.5 sm:w-full">
-              <Link href={"/profile"} className="flex items-center justify-center w-9 h-10">
-                <Image src="/images/img_s.svg" width={50} height={50} alt="settings icon" className="w-9 h-10 sm:w-6 sm:h-8" />
-              </Link>
-              {isLoggedIn ? (
-                <Button onClick={handleLogout} size="lg" as="p" className="!text-sky-800">
-                  Logout
-                </Button>
-              ) : (
-                <Link href="/login">
-                  <Text size="lg" as="p" className="!text-sky-800">
-                    Login
-                  </Text>
-                </Link>
-              )}
-            </div>
+            <Navbar />
           </div>
-          <div className="absolute bottom-0 right-0 mb-10 mr-10 w-[52%] md:w-full">
+          <div className="absolute bottom-0 right-0 mb-10 mr-10 w-[52%] md:w-full delicious-image">
             <Img
               src="/images/img_pngtree_delicious.png"
               width={400}
@@ -118,7 +102,7 @@ export default function LandingPagePage() {
             />
           </div>
         </div>
-        <div className="relative mt-[-169px] flex flex-col justify-center bg-yellow-50 pb-[200px] pt-[201px] md:py-5">
+        <div className="relative mt-[-169px] flex flex-col justify-center bg-yellow-50">
           {searchBarValue2 ? (
             <div className="flex flex-wrap gap-3 justify-center">
               {filteredRecipes.length > 0 ? (
@@ -152,7 +136,7 @@ export default function LandingPagePage() {
             </div>
           ) : (
             <>
-              <div className="mt-64 flex w-[93%] md:w-full md:p-5">
+              <div className="mt-64 flex w-[93%] md:w-full md:p-5 new-recipe">
                 <div className="flex w-full flex-col gap-[95px] md:gap-[71px] sm:gap-[47px]">
                   <div className="ml-[135px] flex w-[20%] items-center gap-[30px] md:ml-0 md:w-full sm:flex-col">
                     <div className="h-[140px] w-[25px] bg-amber-400" />
@@ -162,7 +146,7 @@ export default function LandingPagePage() {
                   </div>
                   <div className="flex items-center justify-between gap-5 md:flex-col">
                     <div className="relative h-[881px] w-[52%] md:w-full">
-                      <div className="absolute left-[0.00px] top-[0.00px] m-auto h-[820px] w-[55%] bg-amber-400" />
+                    <div className="absolute left-[0.00px] top-[0.00px] m-auto h-[820px] w-[55%] bg-amber-400" />
                       <Img
                         src="/images/img_rectangle_313.png"
                         width={400}
@@ -212,7 +196,7 @@ export default function LandingPagePage() {
                         <Text
                           size="3xl"
                           as="p"
-                          className="absolute bottom-[8%] left-[8%] m-auto w-[22%] capitalize leading-[41px]"
+                          className="absolute bottom-[8%] left-[8%] m-auto w-[22%] capitalize leading-[41px] !text-[#FFF5EC]"
                         >
                           {recipe.title}
                         </Text>
@@ -220,11 +204,11 @@ export default function LandingPagePage() {
                     ))}
                   </div>
                   <div className="flex justify-center gap-4">
-                    <Button onClick={handlePreviousPage} className="mt-8 px-4 py-2 bg-amber-400 text-white rounded-lg">
-                      Previous
+                    <Button onClick={handlePreviousPage} className="mt-8 px-4 py-2 bg-amber-400 !text-[#FFF5EC] rounded-lg">
+                      Prev
                     </Button>
-                    <Text className="mt-8 px-4 py-2 text-center text-black bg-amber-400">{currentPage}</Text>
-                    <Button onClick={handleNextPage} className="mt-8 px-4 py-2 bg-amber-400 text-white rounded-lg">
+                    <Text size = "lg" className="mt-8 p-4 text-center">{currentPage}</Text>
+                    <Button onClick={handleNextPage} className="mt-8 px-4 py-2 bg-amber-400 !text-[#FFF5EC] rounded-lg">
                       Next
                     </Button>
                   </div>

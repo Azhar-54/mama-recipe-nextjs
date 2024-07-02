@@ -2,7 +2,7 @@
 
 import { Text, Button, Input, TextArea } from "../../../components";
 import Footer from "../../../components/Footer";
-import Header from "../../../components/Header";
+import Header from "../../../components/Navbar";
 import React, { useState, useEffect } from "react";
 import axios from 'axios';
 import { useRouter, useParams } from 'next/navigation'; // Assuming you're using Next.js

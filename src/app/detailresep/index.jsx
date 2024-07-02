@@ -4,7 +4,7 @@ import { useSearchParams } from 'next/navigation';
 import axios from "axios";
 import { Text, Img, Button, TextArea } from "../../components";
 import Footer from "../../components/Footer";
-import Header from "../../components/Header";
+import Header from "../../components/Navbar";
 
 export default function DetailResepPage() {
   const searchParams = useSearchParams();

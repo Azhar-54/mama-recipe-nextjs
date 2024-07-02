@@ -6,7 +6,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { fetchRecipe, toggleLike, saveRecipe } from '../../../redux/slice/feature/recipeSlice';
 import { Text, Img, Button, TextArea } from "../../../components";
 import Footer from "../../../components/Footer";
-import Header from "../../../components/Header";
+import Header from "../../../components/Navbar";
 
 export default function DetailResepPage() {
   const { id } = useParams();
