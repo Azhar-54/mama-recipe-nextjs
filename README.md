@@ -9,9 +9,9 @@
     Recipe Implementation
     <br />
     <br />
- <a href="https://peworld-front-end.vercel.app" target="_blank">View Demo</a>
+ <a href="" target="_blank">View Demo</a>
     ·
-    <a href="" target="_blank">View Back-End Repo</a> 
+    <a href="https://github.com/Azhar-54/pijar-mama-recipe" target="_blank">View Back-End Repo</a> 
   </p>
 </div>
 
