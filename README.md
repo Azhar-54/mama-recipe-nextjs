@@ -9,16 +9,16 @@
     Recipe Implementation
     <br />
     <br />
-    <!-- 
-   <a href="https://peworld-front-end.vercel.app" target="_blank">View Demo</a>
+ <a href="https://peworld-front-end.vercel.app" target="_blank">View Demo</a>
     ·
-    <a href="" target="_blank">View Back-End Repo</a> -->
+    <a href="" target="_blank">View Back-End Repo</a> 
   </p>
 </div>
 
 
 - [Table of Contents](#table-of-contents)
 - [About The Project](#about-the-project)
+  -[Features](#features)
   - [Built With](#built-with)
 - [Getting Started](#getting-started)
   - [Installation](#installation)
@@ -33,6 +33,13 @@
 
 **Mama Recipe** is an innovative application designed to make it easy for users to search for and share cooking recipes. With Mama Recipe, users can easily find a variety of recipes uploaded by other users, as well as save and manage their favorite recipes. The application also provides a feature for users to share their own culinary creations, creating an interactive and inspiring cooking community.
 
+## Features
+
+- Recipe List : Browse various recipes.
+- Search Function : Find specific recipes using the search bar.
+- Add Recipe : Users can add new recipes.
+- New Recipes : Discover newly added recipes.
+- User Account : Create and manage user profiles.
 
 ### Built With
 
