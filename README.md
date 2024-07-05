@@ -119,7 +119,38 @@ pass  : budi123
 
 ## Screenshots
 
-
+<table>
+  <tr>
+    <td>Login Page</td>
+    <td>Register Page</td>
+  </tr>
+  <tr>
+    <td><img src="https://imgur.com/IKOHptG.jpg"/></td>
+    <td><img src="https://imgur.com/37xLMfo.jpg"/></td>
+  </tr>
+  <tr>
+    <td>Landing Page</td>
+    <td>Detail Recipe</td> 
+  </tr>
+  <tr>
+    <td><img src="https://imgur.com/CNRrYwH.jpg"/></td>
+    <td><img src="https://imgur.com/La8gIUV.jpg" /></td>
+  </tr>
+  <tr>
+    <td>Search Recipe</td>
+       <td>Add Recipe</td> 
+  </tr>
+  <tr>
+    <td><img src="https://imgur.com/rPMyZRq.jpg" /></td>
+    <td><img src="https://imgur.com/J250eyI.jpg" /></td>
+  </tr>
+  <tr>
+    <td>Profile</td>
+  </tr>
+  <tr>
+    <td><img src="https://imgur.com/OVCSzv3.jpg" /></td>
+  </tr>
+</table>
 ## Contributing
 
 Contributions are what make the open source community such an amazing place to be learn, inspire, and create. Any contributions you make are **greatly appreciated**.
@@ -146,4 +177,4 @@ The server for this project was created by [muhammad risano](https://github.com/
 
 ### Related Project
 
-:rocket: [`Peworld`](https://github.com/Azhar-54/peworld-frontEnd)
+:rocket: [`Back-End Mama Recipe`](https://github.com/Azhar-54/pijar-mama-recipe)
