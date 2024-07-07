@@ -1,5 +1,5 @@
 <div align="center">
-  <a href="https://github.com/Azhar-54/peworld-frontEnd">
+  <a href="https://github.com/Azhar-54/mama-recipe-nextjs">
       <img src="public\images\img_barbecue_1.svg" width="350"/>
   </a>
 
@@ -9,7 +9,7 @@
     Recipe Implementation
     <br />
     <br />
- <a href="" target="_blank">View Demo</a>
+ <a href="https://mama-recipe-l2nt.vercel.app/" target="_blank">View Demo</a>
     ·
     <a href="https://github.com/Azhar-54/pijar-mama-recipe" target="_blank">View Back-End Repo</a> 
   </p>
@@ -35,11 +35,15 @@
 
 ## Features
 
-- Recipe List : Browse various recipes.
-- Search Function : Find specific recipes using the search bar.
-- Add Recipe : Users can add new recipes.
-- New Recipes : Discover newly added recipes.
-- User Account : Create and manage user profiles.
+- Explore Recipes: Dive into a vast collection of diverse and delicious recipes.
+- 
+-Advanced Search: Easily find specific recipes with our powerful search feature.
+
+-Add Your Own Recipes: Share your culinary creations by adding new recipes to our collection. 
+
+-Discover New Recipes: Stay updated with the latest and freshest recipes added by our community. 
+
+-User Accounts: Create and personalize your profile, update your recipes, like and save your favorite recipes for easy access later.
 
 ### Built With
 
@@ -133,15 +137,15 @@ pass  : budi123
     <td>Detail Recipe</td> 
   </tr>
   <tr>
-    <td><img src="https://imgur.com/CNRrYwH.jpg"/></td>
-    <td><img src="https://imgur.com/La8gIUV.jpg" /></td>
+    <td><img src="https://imgur.com/0usd4Pn.jpg"/></td>
+    <td><img src="https://imgur.com/Op4GmLK.jpg" /></td>
   </tr>
   <tr>
     <td>Search Recipe</td>
        <td>Add Recipe</td> 
   </tr>
   <tr>
-    <td><img src="https://imgur.com/rPMyZRq.jpg" /></td>
+    <td><img src="https://imgur.com/SBkp2yn.jpg" /></td>
     <td><img src="https://imgur.com/J250eyI.jpg" /></td>
   </tr>
   <tr>
@@ -178,3 +182,4 @@ The server for this project was created by [muhammad risano](https://github.com/
 ### Related Project
 
 :rocket: [`Back-End Mama Recipe`](https://github.com/Azhar-54/pijar-mama-recipe)
+:rocket: [`Demo Mama Recipe`](https://mama-recipe-l2nt.vercel.app/)
