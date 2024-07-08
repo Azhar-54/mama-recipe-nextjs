@@ -36,14 +36,14 @@
 ## Features
 
 - Explore Recipes: Dive into a vast collection of diverse and delicious recipes.
-- 
--Advanced Search: Easily find specific recipes with our powerful search feature.
+  
+- Advanced Search: Easily find specific recipes with our powerful search feature.
 
--Add Your Own Recipes: Share your culinary creations by adding new recipes to our collection. 
+- Add Your Own Recipes: Share your culinary creations by adding new recipes to our collection. 
 
--Discover New Recipes: Stay updated with the latest and freshest recipes added by our community. 
+- Discover New Recipes: Stay updated with the latest and freshest recipes added by our community. 
 
--User Accounts: Create and personalize your profile, update your recipes, like and save your favorite recipes for easy access later.
+- User Accounts: Create and personalize your profile, update your recipes, like and save your favorite recipes for easy access later.
 
 ### Built With
 
